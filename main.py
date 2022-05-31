@@ -87,10 +87,10 @@ def fill_report_form():
     data.send_keys("12052022")
 
     hora_inicio = browser.find_element(By.ID, "Edit2")
-    hora_inicio.send_keys("165023")
+    hora_inicio.send_keys("115023")
 
     hora_fim = browser.find_element(By.ID, "Edit3")
-    hora_fim.send_keys("175023")
+    hora_fim.send_keys("185023")
 
     ok_btn = browser.find_element(By.ID, "A1")
     ok_btn.click()
