@@ -10,3 +10,6 @@ class Relatorio():
 
     def save_report(self):
         pass
+
+    def rename_report(self):
+        pass
