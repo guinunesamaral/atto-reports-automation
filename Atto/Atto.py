@@ -1,8 +1,9 @@
 from selenium import webdriver
-from time import sleep
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from time import sleep
+import os
 
 
 class Atto:
@@ -12,13 +13,16 @@ class Atto:
     def login(self):
         self.browser.get(
             "https://cloud.attodigital.com/AttoSolution/WebLogin/frmLoginAgentClient.aspx")
+        print(os.environ.get("NAKTON_ATTO_LOGIN"))
+        print(os.environ.get("NAKTON_ATTO_PASSWORD"))
+
         login_input = self.browser.find_element(By.ID, "edtLogin")
         login_input.clear()
-        login_input.send_keys("vik_api")
+        login_input.send_keys(os.environ.get("NAKTON_ATTO_LOGIN"))
 
         pwd_input = self.browser.find_element(By.ID, "edtPws")
         pwd_input.clear()
-        pwd_input.send_keys("831b29828d")
+        pwd_input.send_keys(os.environ.get("NAKTON_ATTO_PASSWORD"))
 
         self.browser.find_element(By.ID, "login-button").click()
 
