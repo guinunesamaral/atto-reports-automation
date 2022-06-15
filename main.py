@@ -1,10 +1,11 @@
+from datetime import datetime
 from selenium import webdriver
 from Atto.Atto import Atto
 from Relatorio.RelatorioCallHistoryHistorico import RelatorioCallHistoryHistorico
 from Relatorio.RelatorioHistoricoCallback import RelatorioHistoricoCallback
 from Relatorio.RelatorioDiallerCallsHistorico import RelatorioDiallerCallsHistorico
 from Relatorio.RelatorioPesquisaSatisfacao import RelatorioPesquisaSatisfacao
-from Relatorio.RelatorioAgentActions import RelatorioAgentActions
+from Relatorio.RelatorioAgentActionsHistorico import RelatorioAgentActionsHistorico
 from FileManager.FileManager import FileManager
 
 file_manager = FileManager()
@@ -21,21 +22,21 @@ atto.login()
 atto.open_window_relatorios()
 atto.switch_to_window_relatorios()
 
-relatorio_call_history_historico = RelatorioCallHistoryHistorico(
-    browser, file_manager)
-relatorio_historico_callback = RelatorioHistoricoCallback(
-    browser, file_manager)
-relatorio_dialler_calls_historico = RelatorioDiallerCallsHistorico(
-    browser, file_manager)
-relatorio_pesquisa_satisfacao = RelatorioPesquisaSatisfacao(
-    browser, file_manager)
-relatorio_agent_actions = RelatorioAgentActions(browser, file_manager)
+day = datetime.today().strftime("%A")
+relatorios = []
 
-relatorios = [relatorio_call_history_historico,
-              relatorio_historico_callback,
-              relatorio_dialler_calls_historico,
-              relatorio_pesquisa_satisfacao,
-              relatorio_agent_actions]
+if day == "Monday":
+    relatorios = [
+        RelatorioCallHistoryHistorico(browser, file_manager)
+    ]
+else:
+    relatorios = [
+        RelatorioCallHistoryHistorico(browser, file_manager),
+        RelatorioHistoricoCallback(browser, file_manager),
+        RelatorioDiallerCallsHistorico(browser, file_manager),
+        RelatorioPesquisaSatisfacao(browser, file_manager),
+        RelatorioAgentActionsHistorico(browser, file_manager)
+    ]
 
 for r in relatorios:
     r.execute()

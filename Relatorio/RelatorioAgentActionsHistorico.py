@@ -6,13 +6,13 @@ from datetime import datetime, timedelta
 from FileManager.FileManager import FileManager
 
 
-class RelatorioAgentActions(Relatorio, RecursosHumanos):
+class RelatorioAgentActionsHistorico(Relatorio, RecursosHumanos):
     def __init__(self, browser: webdriver.Chrome, file_manager: FileManager):
         self.browser = browser
         self.file_manager = file_manager
 
     def execute(self):
-        self.select_relatorio("AgentActions")
+        self.select_relatorio("AgentActionsHistorico")
         self.fill_report_form()
         self.save_report()
         self.rename_report()
@@ -47,6 +47,6 @@ class RelatorioAgentActions(Relatorio, RecursosHumanos):
         downloads_path = self.file_manager.join_root_with_path("downloads")
         old_file_path = self.file_manager.join_paths(downloads_path, file)
         new_file_path = self.file_manager.join_paths(
-            downloads_path, "AgentActions.CSV")
+            downloads_path, "AgentActionsHistorico.CSV")
         self.file_manager.rename_file(
             old_file_path, new_file_path)

@@ -9,7 +9,7 @@ class RecursosHumanos(Campanha):
     def select_relatorio(self, nome_relatorio):
         self.browser.find_element(By.ID, "mnuRH").click()
         match nome_relatorio:
-            case "AgentActions":
-                self.id_relatorio = "myGrid-cell-0-0-box"
+            case "AgentActionsHistorico":
+                self.id_relatorio = "myGrid-cell-0-1-box"
         self.switch_to_iframe_report_content(
             "RecursosHumanos", self.id_relatorio)

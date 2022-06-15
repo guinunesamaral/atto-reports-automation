@@ -1,8 +1,0 @@
-Campanha Ativa
-	Relatório CallHistory
-	Relatório Histórico Callback
-	Relatório DialerCalls Histórico
-Campanha Receptiva
-	Relatório Pesquisa de Satisfação
-Recursos Humanos
-	Relatório AgentActions
