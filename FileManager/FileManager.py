@@ -29,13 +29,6 @@ class FileManager:
         if os.path.exists(file_path):
             os.rename(file_path, new_file_path)
 
-    def delete_file(self, file_dir, file_name):
-        file_path = self.join_root_with_path(file_dir + file_name)
-        if os.path.exists(file_path):
-            os.remove(file_path)
-        else:
-            print("The directory does not exist")
-
     def latest_downloaded_file(self, num_file):
         downloads_path = self.join_root_with_path(
             "downloads")
@@ -44,11 +37,9 @@ class FileManager:
             files = sorted(os.listdir(os.getcwd()), key=os.path.getmtime)
             if (len(files) < num_file):
                 time.sleep(1)
-                print('waiting for download to be initiated')
             else:
                 newest = files[-1]
                 if ".crdownload" in newest:
                     time.sleep(1)
-                    print('waiting for download to complete')
                 else:
                     return newest
