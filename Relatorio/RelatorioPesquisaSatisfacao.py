@@ -23,14 +23,11 @@ class RelatorioPesquisaSatisfacao(Relatorio, CampanhaReceptiva):
         yesterday = datetime.today() - timedelta(days=1)
         yesterday_formatted = yesterday.strftime('%d%m%Y')
 
-        today = datetime.today()
-        today_formatted = today.strftime('%d%m%Y')
-
         data_inicio = self.browser.find_element(By.ID, "Edit1")
         data_inicio.send_keys(yesterday_formatted)
 
         data_fim = self.browser.find_element(By.ID, "Edit2")
-        data_fim.send_keys(today_formatted)
+        data_fim.send_keys(yesterday_formatted)
 
         hora_inicio = self.browser.find_element(By.ID, "Edit3")
         hora_inicio.send_keys("000000")
