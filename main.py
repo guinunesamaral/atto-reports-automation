@@ -15,6 +15,7 @@ options = webdriver.ChromeOptions()
 prefs = {
     'download.default_directory': file_manager.join_root_with_path('downloads')}
 options.add_experimental_option("prefs", prefs)
+options.add_argument("headless")
 browser = webdriver.Chrome(options=options)
 
 atto = Atto(browser)
