@@ -11,16 +11,15 @@ class Atto:
         self.browser = browser
 
     def login(self):
-        self.browser.get(
-            "https://cloud.attodigital.com/AttoSolution/WebLogin/frmLoginAgentClient.aspx")
+        self.browser.get(os.environ.get("ATTO_URL"))
 
         login_input = self.browser.find_element(By.ID, "edtLogin")
         login_input.clear()
-        login_input.send_keys(os.environ.get("NAKTON_ATTO_LOGIN"))
+        login_input.send_keys(os.environ.get("ATTO_LOGIN"))
 
         pwd_input = self.browser.find_element(By.ID, "edtPws")
         pwd_input.clear()
-        pwd_input.send_keys(os.environ.get("NAKTON_ATTO_PASSWORD"))
+        pwd_input.send_keys(os.environ.get("ATTO_PASSWORD"))
 
         self.browser.find_element(By.ID, "login-button").click()
 
