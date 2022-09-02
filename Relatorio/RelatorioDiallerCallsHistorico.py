@@ -1,3 +1,4 @@
+import logging
 from selenium import webdriver
 from Relatorio.Relatorio import Relatorio
 from Campanha.CampanhaAtiva import CampanhaAtiva
@@ -12,10 +13,19 @@ class RelatorioDiallerCallsHistorico(Relatorio, CampanhaAtiva):
         self.file_manager = file_manager
 
     def execute(self):
-        self.select_relatorio("DiallerCallsHistorico")
-        self.fill_report_form()
-        self.save_report()
-        self.rename_report()
+        logging.basicConfig(
+            filename=self.file_manager.atto_reports_automation_log, level=logging.INFO)
+        try:
+            logging.info(
+                f"{datetime.now()}, Started RelatorioDiallerCallsHistorico")
+            self.select_relatorio("DiallerCallsHistorico")
+            self.fill_report_form()
+            self.save_report()
+            self.rename_report()
+            logging.info(
+                f"{datetime.now()}, Finished RelatorioDiallerCallsHistorico")
+        except Exception as e:
+            logging.error(f"{datetime.now()}, {e=}")
 
     def fill_report_form(self):
         self.switch_to_iframe_data()

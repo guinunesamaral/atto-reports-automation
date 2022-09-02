@@ -1,3 +1,4 @@
+import logging
 from selenium import webdriver
 from Relatorio.Relatorio import Relatorio
 from Campanha.CampanhaAtiva import CampanhaAtiva
@@ -5,16 +6,26 @@ from selenium.webdriver.common.by import By
 from datetime import datetime, timedelta
 from FileManager.FileManager import FileManager
 
+
 class RelatorioCallHistoryHistorico(Relatorio, CampanhaAtiva):
     def __init__(self, browser: webdriver.Chrome, file_manager: FileManager):
         self.browser = browser
         self.file_manager = file_manager
 
     def execute(self):
-        self.select_relatorio("CallHistoryHistorico")
-        self.fill_report_form()
-        self.save_report()
-        self.rename_report()
+        logging.basicConfig(
+            filename=self.file_manager.atto_reports_automation_log, level=logging.INFO)
+        try:
+            logging.info(
+                f"{datetime.now()}, Started RelatorioCallHistoryHistorico")
+            self.select_relatorio("CallHistoryHistorico")
+            self.fill_report_form()
+            self.save_report()
+            self.rename_report()
+            logging.info(
+                f"{datetime.now()}, Finished RelatorioCallHistoryHistorico")
+        except Exception as e:
+            logging.error(f"{datetime.now()}, {e=}")
 
     def fill_report_form(self):
         self.switch_to_iframe_data()

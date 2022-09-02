@@ -6,6 +6,8 @@ import time
 class FileManager:
     def __init__(self):
         self.root_dir = os.path.dirname(os.path.abspath("main.py"))
+        self.atto_reports_automation_log = os.path.abspath(
+            "atto_reports_automation.log")
 
     def join_root_with_path(self, dir_name):
         return os.path.join(self.root_dir, dir_name)

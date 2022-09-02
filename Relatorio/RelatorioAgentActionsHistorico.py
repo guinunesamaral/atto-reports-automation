@@ -4,6 +4,7 @@ from Campanha.RecursosHumanos import RecursosHumanos
 from selenium.webdriver.common.by import By
 from datetime import datetime, timedelta
 from FileManager.FileManager import FileManager
+import logging
 
 
 class RelatorioAgentActionsHistorico(Relatorio, RecursosHumanos):
@@ -12,10 +13,19 @@ class RelatorioAgentActionsHistorico(Relatorio, RecursosHumanos):
         self.file_manager = file_manager
 
     def execute(self):
-        self.select_relatorio("AgentActionsHistorico")
-        self.fill_report_form()
-        self.save_report()
-        self.rename_report()
+        logging.basicConfig(
+            filename=self.file_manager.atto_reports_automation_log, level=logging.INFO)
+        try:
+            logging.info(
+                f"{datetime.now()}, Started RelatorioAgentActionsHistorico")
+            self.select_relatorio("AgentActionsHistorico")
+            self.fill_report_form()
+            self.save_report()
+            self.rename_report()
+            logging.info(
+                f"{datetime.now()}, Finished RelatorioAgentActionsHistorico")
+        except Exception as e:
+            logging.error(f"{datetime.now()}, {e=}")
 
     def fill_report_form(self):
         self.switch_to_iframe_data()
