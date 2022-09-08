@@ -1,4 +1,5 @@
 from datetime import datetime
+import logging
 from selenium import webdriver
 from Atto.Atto import Atto
 from Relatorio.RelatorioCallHistoryHistorico import RelatorioCallHistoryHistorico
@@ -17,13 +18,22 @@ def main():
     prefs = {
         'download.default_directory': file_manager.join_root_with_path('downloads')}
     options.add_experimental_option("prefs", prefs)
-    options.add_argument("headless")
+    # options.add_argument("headless")
     browser = webdriver.Chrome(options=options)
 
     atto = Atto(browser)
-    atto.login()
-    atto.open_window_relatorios()
-    atto.switch_to_window_relatorios()
+    logging.basicConfig(
+        filename=file_manager.atto_reports_automation_log, level=logging.INFO)
+    try:
+        logging.info(
+            f"{datetime.now()}, Started Login")
+        atto.login()
+        logging.info(
+            f"{datetime.now()}, Finished Login")
+        atto.open_window_relatorios()
+        atto.switch_to_window_relatorios()
+    except Exception as e:
+        logging.error(f"{datetime.now()}, {e=}")
 
     day = datetime.today().strftime("%A")
     relatorios = []
