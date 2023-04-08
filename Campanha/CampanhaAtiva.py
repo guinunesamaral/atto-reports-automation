@@ -1,22 +1,23 @@
-from Campanha.Campanha import Campanha
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+from selenium import webdriver
 from selenium.webdriver.common.by import By
+from Campanha.Campanha import Campanha
 
 
 class CampanhaAtiva(Campanha):
-    def __init__(self, browser):
+    def __init__(self, browser: webdriver.Chrome):
         self.browser = browser
 
-    def select_relatorio(self, nome_relatorio):
+    def selecionar_relatorio(self, relatorio_nome):
         self.browser.find_element(By.ID, "mnuCO").click()
-        match nome_relatorio:
+
+        relatorio_id = ""
+        match relatorio_nome:
             case "CallHistoryHistorico":
-                self.id_relatorio = "myGrid-cell-0-1-box"
+                relatorio_id = "myGrid-cell-0-1-box"
             case "HistoricoCallback":
-                self.id_relatorio = "myGrid-cell-0-2-box"
+                relatorio_id = "myGrid-cell-0-2-box"
             case "DiallerCallsHistorico":
-                self.id_relatorio = "myGrid-cell-0-4-box"
+                relatorio_id = "myGrid-cell-0-4-box"
 
         self.switch_to_iframe_report_content(
-            "CampanhaAtiva", self.id_relatorio)
+            "CampanhaAtiva", relatorio_id)

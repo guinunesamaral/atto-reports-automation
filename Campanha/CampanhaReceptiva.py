@@ -6,10 +6,10 @@ class CampanhaReceptiva(Campanha):
     def __init__(self, browser):
         self.browser = browser
 
-    def select_relatorio(self, nome_relatorio):
+    def selecionar_relatorio(self, relatorio_nome):
         self.browser.find_element(By.ID, "mnuCI").click()
-        match nome_relatorio:
+        match relatorio_nome:
             case "PesquisaSatisfacao":
-                self.id_relatorio = "myGrid-cell-0-3-box"
+                self.relatorio_id = "myGrid-cell-0-3-box"
         self.switch_to_iframe_report_content(
-            "CampanhaReceptiva", self.id_relatorio)
+            "CampanhaReceptiva", self.relatorio_id)

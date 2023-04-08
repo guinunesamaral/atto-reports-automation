@@ -1,33 +1,29 @@
 import logging
+from datetime import datetime, timedelta
 from selenium import webdriver
+from selenium.webdriver.common.by import By
 from Relatorio.Relatorio import Relatorio
 from Campanha.CampanhaAtiva import CampanhaAtiva
-from selenium.webdriver.common.by import By
-from datetime import datetime, timedelta
-from FileManager.FileManager import FileManager
 
 
 class RelatorioDiallerCallsHistorico(Relatorio, CampanhaAtiva):
-    def __init__(self, browser: webdriver.Chrome, file_manager: FileManager):
+    def __init__(self, browser: webdriver.Chrome, logger: logging):
         self.browser = browser
-        self.file_manager = file_manager
+        self.logger = logger
 
-    def execute(self):
-        logging.basicConfig(
-            filename=self.file_manager.atto_reports_automation_log, level=logging.INFO)
+    def executar(self):
         try:
-            logging.info(
+            self.logger.info(
                 f"{datetime.now()}, Started RelatorioDiallerCallsHistorico")
-            self.select_relatorio("DiallerCallsHistorico")
-            self.fill_report_form()
-            self.save_report()
-            self.rename_report()
-            logging.info(
+            self.selecionar_relatorio("DiallerCallsHistorico")
+            self.preencher_formulario()
+            self.baixar()
+            self.logger.info(
                 f"{datetime.now()}, Finished RelatorioDiallerCallsHistorico")
         except Exception as e:
-            logging.error(f"{datetime.now()}, {e=}")
+            self.logger.error(f"{datetime.now()}, {e=}")
 
-    def fill_report_form(self):
+    def preencher_formulario(self):
         self.switch_to_iframe_data()
 
         yesterday = datetime.today() - timedelta(days=1)
@@ -47,16 +43,7 @@ class RelatorioDiallerCallsHistorico(Relatorio, CampanhaAtiva):
 
         self.switch_to_window_relatorios()
 
-    def save_report(self):
+    def baixar(self):
         self.switch_to_iframe_report()
         self.browser.find_element(By.ID, "btnSave").click()
         self.browser.find_element(By.ID, "divSaveCSV").click()
-
-    def rename_report(self):
-        file = self.file_manager.latest_downloaded_file(3)
-        downloads_path = self.file_manager.join_root_with_path("downloads")
-        old_file_path = self.file_manager.join_paths(downloads_path, file)
-        new_file_path = self.file_manager.join_paths(
-            downloads_path, "DiallerCallsHistorico.CSV")
-        self.file_manager.rename_file(
-            old_file_path, new_file_path)

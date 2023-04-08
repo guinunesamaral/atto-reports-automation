@@ -2,14 +2,11 @@ class Relatorio():
     def __init__(self):
         pass
 
-    def execute(self):
+    def executar(self):
         pass
 
-    def fill_report_form(self):
+    def preencher_formulario(self):
         pass
 
-    def save_report(self):
-        pass
-
-    def rename_report(self):
+    def baixar(self):
         pass
