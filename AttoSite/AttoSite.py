@@ -45,6 +45,10 @@ class AttoSite:
         self.switch_to_iframe_relatorios()
         self.browser.find_elements(By.CLASS_NAME, "button-name")[3].click()
 
+    def abrir_antigo_portal(self):
+        sleep(1)
+        self.browser.find_element(By.CLASS_NAME, "btnOld").click()
+
     def switch_to_iframe_relatorios(self):
         sleep(1)
         iframe_relatorios = self.browser.find_element(By.ID, "frameLeft")

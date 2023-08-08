@@ -1,6 +1,7 @@
 from time import sleep
 from selenium.webdriver.common.by import By
 from AttoSite.AttoSite import AttoSite
+from Campanha.TiposDeCampanhasEnum import TiposDeCampanhasEnum
 
 
 class Campanha(AttoSite):
@@ -22,15 +23,15 @@ class Campanha(AttoSite):
             By.ID, "frmReportPreview_content")
         self.browser.switch_to.frame(iframe_report)
 
-    def switch_to_iframe_report_content(self, campanha_nome, relatorio_id):
+    def switch_to_iframe_report_content(self, tipo_de_campanha: TiposDeCampanhasEnum, relatorio_id):
         sleep(1)
         campanha_id = ""
-        match campanha_nome:
-            case "CampanhaAtiva":
+        match tipo_de_campanha:
+            case TiposDeCampanhasEnum.ATIVA:
                 campanha_id = "frmCampOutbound_content"
-            case "CampanhaReceptiva":
+            case TiposDeCampanhasEnum.RECEPTIVA:
                 campanha_id = "frmCampInbound_content"
-            case "RecursosHumanos":
+            case TiposDeCampanhasEnum.RECURSOS_HUMANOS:
                 campanha_id = "frmHumanResources_content"
 
         iframe_relatorios = self.browser.find_element(By.ID, campanha_id)

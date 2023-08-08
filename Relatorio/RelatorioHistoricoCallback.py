@@ -4,6 +4,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from Relatorio.Relatorio import Relatorio
 from Campanha.CampanhaAtiva import CampanhaAtiva
+from Relatorio.TiposDeRelatoriosEnum import TiposDeRelatoriosEnum
 
 
 class RelatorioHistoricoCallback(Relatorio, CampanhaAtiva):
@@ -15,7 +16,7 @@ class RelatorioHistoricoCallback(Relatorio, CampanhaAtiva):
         try:
             self.logger.info(
                 f"{datetime.now()}, Started RelatorioHistoricoCallback")
-            self.selecionar_relatorio("HistoricoCallback")
+            self.selecionar_relatorio(TiposDeRelatoriosEnum.HISTORICO_CALLBACK)
             self.preencher_formulario()
             self.baixar()
             self.logger.info(

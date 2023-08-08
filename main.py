@@ -14,6 +14,7 @@ def main():
     atto.login()
     atto.abrir_guia_relatorios()
     atto.switch_to_window_relatorios()
+    atto.abrir_antigo_portal()
 
     relatorios = get_relatorios_do_dia(browser, logger)
     for r in relatorios:

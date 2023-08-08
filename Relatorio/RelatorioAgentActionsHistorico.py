@@ -4,6 +4,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from Relatorio.Relatorio import Relatorio
 from Campanha.RecursosHumanos import RecursosHumanos
+from Relatorio.TiposDeRelatoriosEnum import TiposDeRelatoriosEnum
 
 
 class RelatorioAgentActionsHistorico(Relatorio, RecursosHumanos):
@@ -15,7 +16,8 @@ class RelatorioAgentActionsHistorico(Relatorio, RecursosHumanos):
         try:
             self.logger.info(
                 f"{datetime.now()}, Started RelatorioAgentActionsHistorico")
-            self.selecionar_relatorio("AgentActionsHistorico")
+            self.selecionar_relatorio(
+                TiposDeRelatoriosEnum.AGENT_ACTIONS_HISTORICO)
             self.preencher_formulario()
             self.baixar()
             self.logger.info(
