@@ -24,6 +24,6 @@ class Browser:
         options = ChromeOptions()
         options.add_experimental_option("prefs", prefs)
         options.add_experimental_option("excludeSwitches", ["enable-logging"])
-        # options.add_argument("--headless=new")
+        options.add_argument("--headless=new")
 
         return webdriver.Chrome(options=options)
