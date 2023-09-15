@@ -17,6 +17,6 @@ class Browser:
         options.binary_location = os.environ.get("CHROME_FOR_TESTING_PATH")
         options.add_experimental_option("prefs", prefs)
         options.add_experimental_option("excludeSwitches", ["enable-logging"])
-        # options.add_argument("--headless=new")
+        options.add_argument("--headless=new")
 
         return webdriver.Chrome(options=options)
