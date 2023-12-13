@@ -43,7 +43,9 @@ class AttoSite:
     def abrir_guia_relatorios(self):
         sleep(1)
         self.switch_to_iframe_relatorios()
-        self.browser.find_elements(By.CLASS_NAME, "button-name")[3].click()
+        """ A forma mais correta de buscar o botão 'Relatórios é a abaixo, porém o Selenium apresentou um erro ao realizar essa busca, portanto ela foi substituída pelo XPATH."""
+        # self.browser.find_elements(By.CLASS_NAME, "button-name")[3].click()
+        self.browser.find_element(By.XPATH, '//span[text()="Relatórios"]').click()
 
     def abrir_antigo_portal(self):
         sleep(1)
